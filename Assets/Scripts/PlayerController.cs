@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController sharedInstance;
+    
     private Rigidbody2D rigidBody;
 
-    [SerializeField]
-    private float jumpForce = 60f;
+    private Vector3 startPosition;
 
     [SerializeField]
-    private float runningSpeed = 1.5f;
+    private float jumpForce = 50f;
+
+    [SerializeField]
+    private float runningSpeed = 3f;
 
     //Variable para detectar la capa del suelo
     [SerializeField]
@@ -21,13 +25,17 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        sharedInstance = this;
         rigidBody = GetComponent<Rigidbody2D>();
+        //Guardo siempre la pos inicial
+        startPosition = this.transform.position;
     }
 
-    private void Start()
+    public void StartGame()
     {
         animator.SetBool("isAlive", true);
         animator.SetBool("isGrounded", true);
+        this.transform.position = startPosition;
     }
 
     private void Update()
@@ -81,5 +89,10 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Kill(){
+        GameManager.sharedInstance.GameOver();
+        this.animator.SetBool("isAlive", false);
     }
 }

@@ -23,13 +23,31 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.S)){
+        if(Input.GetButtonDown("Start") && currentGameState != GameState.INGAME){
             StartGame();
+        }
+
+         if(Input.GetButtonDown("Pause")){
+            BackToMenu();
         }
     }
 
     public void StartGame(){
         SetGameState(GameState.INGAME);
+
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
+        //Reseteo la camara cuando el pj muere porque sino se va a cualquier lado y hace un efecto feo
+        cameraFollow.ResetCameraPosition();
+
+        //Solo si se movio un poco (10 = 10 metros)
+        if(PlayerController.sharedInstance.transform.position.x > 10){
+            //Puede pasar que reinicio el juego y NO haya levelblock, por lo tanto remuevo todo y luego genero nuevos
+            LevelGenerator.sharedInstance.RemoveAllTheBlocks();
+            LevelGenerator.sharedInstance.GenerateInitialBlocks();
+        }
+
+        PlayerController.sharedInstance.StartGame();
     }
 
     public void GameOver(){
