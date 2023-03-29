@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 50f;
 
     [SerializeField]
-    private float runningSpeed = 3f;
+    private float runningSpeed = 5f;
 
     //Variable para detectar la capa del suelo
     [SerializeField]

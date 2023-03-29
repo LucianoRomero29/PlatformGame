@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager sharedInstance;
     public GameState currentGameState = GameState.MENU;
+    [SerializeField] private Canvas menuCanvas, gameCanvas, gameOverCanvas;
+    public int collectedObjects = 0;
 
     private void Awake() {
         sharedInstance = this;
@@ -27,9 +29,15 @@ public class GameManager : MonoBehaviour
             StartGame();
         }
 
-         if(Input.GetButtonDown("Pause")){
+        if(Input.GetButtonDown("Pause")){
             BackToMenu();
         }
+
+        #if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            ExitGame();
+        }
+        #endif
     }
 
     public void StartGame(){
@@ -48,6 +56,8 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerController.sharedInstance.StartGame();
+
+        collectedObjects = 0;
     }
 
     public void GameOver(){
@@ -58,20 +68,41 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.MENU);
     }
 
+    //Para mobile no es necesario esto. 
+    public void ExitGame(){
+        //Application.Quit();
+        //Se utilizan estos IF / ELSE con # indicando que es una decision basada en la plataforma que se va a ejecutar
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
+
     //Metodo encargado de cambiar el estado del juego
     public void SetGameState(GameState newGameState){
-
+        //TODO: COMPLETAR
         //Segun que estado sea el nuevo, tengo que llamar una escena nueva
         if(newGameState == GameState.MENU){
-
+            menuCanvas.enabled = true;
+            gameCanvas.enabled = false;
+            gameOverCanvas.enabled = false;
         }
         else if(newGameState == GameState.INGAME){
-            
+            menuCanvas.enabled = false;
+            gameCanvas.enabled = true;
+            gameOverCanvas.enabled = false;
         }
         else if(newGameState == GameState.GAMEOVER){
-            
+            menuCanvas.enabled = false;
+            gameCanvas.enabled = false;
+            gameOverCanvas.enabled = true;
         }
 
         this.currentGameState = newGameState;
+    }
+
+    public void CollectObject(int objectValue){
+        this.collectedObjects += objectValue;
     }
 }
