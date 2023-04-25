@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &6584670674657476376
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,7 +106,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!58 &3457286667477489423
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -135,4 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebcff9d4a0737b94c82027a1e2fecfff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   value: 2
+  collectSound: {fileID: 8300000, guid: d096da07b2554644197534d4ee579129, type: 3}

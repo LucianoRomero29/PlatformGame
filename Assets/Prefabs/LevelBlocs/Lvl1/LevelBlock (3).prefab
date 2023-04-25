@@ -293,6 +293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small_Floor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 928777104020778509, guid: 07e4d05a5ab0bbb44bc9ad0b9df57761, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 932209144272568075, guid: 07e4d05a5ab0bbb44bc9ad0b9df57761, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: aefe003defb266e438ef5361d3661dd1
+guid: 892ca9eb2352d6d43ad4bb53cf589f55
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -114,70 +115,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_0
-      rect:
-        serializedVersion: 2
-        x: 206
-        y: 2
-        width: 1715
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5eb7caed767376d469639b5c9354b4e1
-      internalID: 1669574913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_1
-      rect:
-        serializedVersion: 2
-        x: 921
-        y: 192
-        width: 312
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7cbcdccb2226d934dabe3e4ae44e6fce
-      internalID: 751283174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_2
-      rect:
-        serializedVersion: 2
-        x: 610
-        y: 307
-        width: 492
-        height: 97
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ec528877b53971499a34f68ea22d02e
-      internalID: 946948213
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -188,10 +126,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_0: 1669574913
-      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_1: 751283174
-      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_2: 946948213
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

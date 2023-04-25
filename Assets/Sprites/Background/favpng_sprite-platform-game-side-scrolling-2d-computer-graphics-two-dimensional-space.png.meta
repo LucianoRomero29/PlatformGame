@@ -1,21 +1,9 @@
 fileFormatVersion: 2
-guid: 5000ca8b4361d486b8fd089317dd5f50
+guid: aefe003defb266e438ef5361d3661dd1
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 21300000
-    second: Player_Jump_0
-  - first:
-      213: 21300002
-    second: Player_Jump_1
-  - first:
-      213: 21300004
-    second: Player_Jump_2
-  - first:
-      213: 21300006
-    second: Player_Jump_3
+  internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -74,7 +62,8 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -87,7 +76,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
@@ -99,90 +88,93 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Jump_0
+      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 51
-        width: 237
-        height: 411
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 206
+        y: 2
+        width: 1715
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02305410000000000800000000000000
-      internalID: 21300000
+      spriteID: 5eb7caed767376d469639b5c9354b4e1
+      internalID: 1669574913
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_1
+      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_1
       rect:
         serializedVersion: 2
-        x: 268
-        y: 109
-        width: 217
-        height: 296
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 921
+        y: 192
+        width: 312
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22305410000000000800000000000000
-      internalID: 21300002
+      spriteID: 7cbcdccb2226d934dabe3e4ae44e6fce
+      internalID: 751283174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_2
+      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_2
       rect:
         serializedVersion: 2
-        x: 521
-        y: 228
-        width: 157
-        height: 235
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 610
+        y: 307
+        width: 492
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42305410000000000800000000000000
-      internalID: 21300004
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Jump_3
-      rect:
-        serializedVersion: 2
-        x: 693
-        y: 0
-        width: 273
-        height: 455
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62305410000000000800000000000000
-      internalID: 21300006
+      spriteID: 5ec528877b53971499a34f68ea22d02e
+      internalID: 946948213
       vertices: []
       indices: 
       edges: []
@@ -190,7 +182,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -198,10 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Jump_0: 21300000
-      Player_Jump_1: 21300002
-      Player_Jump_3: 21300006
-      Player_Jump_2: 21300004
+      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_0: 1669574913
+      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_1: 751283174
+      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_2: 946948213
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
