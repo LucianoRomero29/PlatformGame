@@ -13,13 +13,14 @@ public class LevelGenerator : MonoBehaviour
     //Esta lista se rellena dinamicamente
     [SerializeField] private List<LevelBlock> currentBlocks = new List<LevelBlock>();
     [SerializeField] private LevelBlock firstBlock;
-    private int distanceToNextLevel = 500, addDistanceToNewLevel = 50, distanceTraveledByLevel = 0;
-    
+    [SerializeField] private LevelUpPopup lvlUpPopup;
+
+    private int distanceToNextLevel = 20, addDistanceToNewLevel = 5;
     [Header("Levels")]
-    //Esta es una lista que tiene todos los niveles que iría a reemplazar a AllTheLevelBlocks
-    //TODO: Sino me deja hacer una lista de listas, hacer tanta cantidad de listas como niveles tenga
-    [SerializedField] private List<List<LevelBlock>> gameLevels = new List<List<LevelBlock>>();
+    [SerializeField] private List<GameLevel> gameLevels;
+    
     private bool allLevelsPassed = false;
+    private int levelIndex;
 
     private void Awake() {
         sharedInstance = this;
@@ -29,33 +30,31 @@ public class LevelGenerator : MonoBehaviour
         GenerateInitialBlocks();
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         LevelUpByDistanceTraveled();
     }
 
     private void LevelUpByDistanceTraveled(){
-        distanceTraveledByLevel = PlayerController.sharedInstance.GetDistance();
-        if(distanceTraveledByLevel > distanceToNextLevel + addDistanceToNewLevel * GameManager.sharedInstance.levelIndex){
+        if(PlayerController.sharedInstance.GetDistance() > distanceToNextLevel + (addDistanceToNewLevel * GameManager.sharedInstance.levelIndex)){
             //Reseteo esta variable porque es la distancia que recorro por nivel, y si superó eso quiere decir que paso el nivel
-            distanceTraveledByLevel = 0;
-            addDistanceToNewLevel += 50;
+            // distanceToNextLevel = distanceToNextLevel * GameManager.sharedInstance.levelIndex;
+            addDistanceToNewLevel += 10;
             GameManager.sharedInstance.levelIndex++;
-            Debug.Log("Subí al nivel: " + GameManager.sharedInstance.levelIndex);
-            //TODO: Si esto llega a funcionar la idea es que cuando supere la cantidad de niveles que hay
-            //utilizar ahora si la variable AllTheLevelBlocks la cual en esa guardaría todos los niveles
-            //Y una vez superados (por ahora tenemos 5) los niveles, utilizar esta variable
+
+            lvlUpPopup.ShowPopup(GameManager.sharedInstance.levelIndex);
+            //TODO: Falta un sonido de checkpoint
+
             if(GameManager.sharedInstance.levelIndex > gameLevels.Count){
                 allLevelsPassed = true;
             }
         }
     }
 
-    public void AddLevelBlock(){
-        //TODO: Acá reemplace allTheLevelBlocks en la linea 50 y 63 por gameLevel[levelIndex] 
-        levelIndex = GameManager.sharedInstance.levelIndex;
+    public void AddLevelBlock(bool restartGame = false){
+        levelIndex = restartGame == true ? levelIndex = 1 : GameManager.sharedInstance.levelIndex;
 
         //Elige un bloque random
-        int randomIndex = !allLevelsPassed ? Random.Range(0, gameLevels[levelIndex].Count) : Random.Range(0, allTheLevelBlocks.Count);
+        int randomIndex = !allLevelsPassed ? Random.Range(0, gameLevels[levelIndex - 1].GetComponent<GameLevel>().level.Count) : Random.Range(0, allTheLevelBlocks.Count);
 
         //Instancia ese bloque elegido y lo hace hijo de este levelgenerator
         LevelBlock currentBlock; 
@@ -64,12 +63,11 @@ public class LevelGenerator : MonoBehaviour
         Vector3 spawnPosition = Vector3.zero;
         if(currentBlocks.Count == 0){
             //Si es el primero que genero, quiero que sea el bloque que yo elijo
-            //TODO: Ver como hacer esto de FIRST BLOCK, creo que solo entra a este IF una vez al inicio
             currentBlock = (LevelBlock)Instantiate(firstBlock);
             currentBlock.transform.SetParent(this.transform, false);
             spawnPosition = levelStartPoint.position;
         }else{
-            currentBlock = !allLevelsPassed ? (LevelBlock)Instantiate(gameLevels[levelIndex][randomIndex]) : (LevelBlock)Instantiate(allTheLevelBlocks[randomIndex]);
+            currentBlock = !allLevelsPassed ? (LevelBlock)Instantiate(gameLevels[levelIndex - 1].GetComponent<GameLevel>().level[randomIndex]) : (LevelBlock)Instantiate(allTheLevelBlocks[randomIndex]);
             currentBlock.transform.SetParent(this.transform, false);
             spawnPosition = currentBlocks[currentBlocks.Count - 1].exitPoint.position;
         }
@@ -94,10 +92,10 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateInitialBlocks(){
+    public void GenerateInitialBlocks(bool restartLevel = false){
         for (var i = 0; i < 2; i++)
         {
-            AddLevelBlock();
+            AddLevelBlock(restartLevel);
         }
     }
 }

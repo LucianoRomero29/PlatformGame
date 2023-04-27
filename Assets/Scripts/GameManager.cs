@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Estados del videojuego para manejarlos a traves del manager
 public enum GameState{
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
         if(PlayerController.sharedInstance.transform.position.x > 10){
             //Puede pasar que reinicio el juego y NO haya levelblock, por lo tanto remuevo todo y luego genero nuevos
             LevelGenerator.sharedInstance.RemoveAllTheBlocks();
-            LevelGenerator.sharedInstance.GenerateInitialBlocks();
+            LevelGenerator.sharedInstance.GenerateInitialBlocks(true);
         }
 
         PlayerController.sharedInstance.StartGame();
@@ -82,7 +83,6 @@ public class GameManager : MonoBehaviour
 
     //Metodo encargado de cambiar el estado del juego
     public void SetGameState(GameState newGameState){
-        //TODO: COMPLETAR
         //Segun que estado sea el nuevo, tengo que llamar una escena nueva
         if(newGameState == GameState.MENU){
             menuCanvas.enabled = true;

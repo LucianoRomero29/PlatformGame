@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {   
         //TODO: Ese 2.0 ajustarlo mejor, fijarse que valor es mejor
         //Trazar un rayo (raycast) desde la pos del personaje, mirando hacia abajo, a una distancia de 0.2 (20 centimetros), choco contra el suelo
-        if (Physics2D.Raycast(this.transform.position, Vector2.down, 2f, groundLayer))
+        if (Physics2D.Raycast(this.transform.position, Vector2.down, 2.1f, groundLayer))
         {
             return true;
         }
