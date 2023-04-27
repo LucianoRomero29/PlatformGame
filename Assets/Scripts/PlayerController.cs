@@ -49,14 +49,15 @@ public class PlayerController : MonoBehaviour
         this.healthPoints = INITIAL_HEALTH;
         this.energyPoints = INITIAL_ENERGY;
 
-        StartCoroutine(TirePlayer());
+        // No me interesa cansar al jugador 
+        // StartCoroutine(TirePlayer());
     }
 
     private void Update()
     {
         if (GameManager.sharedInstance.currentGameState == GameState.INGAME)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 Jump(false);
             }
@@ -102,9 +103,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool IsTouchingTheGround()
-    {
+    {   
+        //TODO: Ese 2.0 ajustarlo mejor, fijarse que valor es mejor
         //Trazar un rayo (raycast) desde la pos del personaje, mirando hacia abajo, a una distancia de 0.2 (20 centimetros), choco contra el suelo
-        if (Physics2D.Raycast(this.transform.position, Vector2.down, 1.5f, groundLayer))
+        if (Physics2D.Raycast(this.transform.position, Vector2.down, 2f, groundLayer))
         {
             return true;
         }
@@ -131,7 +133,8 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("maxScore", this.GetDistance());
         }
 
-        StopCoroutine(TirePlayer());
+        //No me interesa cansar al jugador
+        //StopCoroutine(TirePlayer());
     }
 
     public int GetDistance(){

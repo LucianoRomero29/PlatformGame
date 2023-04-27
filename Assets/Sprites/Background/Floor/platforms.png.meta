@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aefe003defb266e438ef5361d3661dd1
+guid: 8ac08eabbd86a1d4d9c43f349c2e3f4e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -63,7 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_0
+      name: platforms_0
       rect:
         serializedVersion: 2
-        x: 206
-        y: 2
-        width: 1715
-        height: 180
+        x: 54
+        y: 796
+        width: 386
+        height: 215
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5eb7caed767376d469639b5c9354b4e1
-      internalID: 1669574913
+      spriteID: bbf8df1541613104f8a3960e78358aaa
+      internalID: 1066607847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_1
+      name: platforms_1
       rect:
         serializedVersion: 2
-        x: 921
-        y: 192
-        width: 312
-        height: 102
+        x: 512
+        y: 803
+        width: 177
+        height: 202
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cbcdccb2226d934dabe3e4ae44e6fce
-      internalID: 751283174
+      spriteID: c92fd41753adcd14b8a22688b3633c3f
+      internalID: -973605235
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_2
+      name: platforms_2
       rect:
         serializedVersion: 2
-        x: 610
-        y: 307
-        width: 492
-        height: 97
+        x: 68
+        y: 494
+        width: 247
+        height: 240
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,8 +173,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ec528877b53971499a34f68ea22d02e
-      internalID: 946948213
+      spriteID: 9fcde04f5bc32c24ea633ca788111239
+      internalID: 1371106670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platforms_3
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 500
+        width: 518
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 104a88e999413ce4a9c36baaf56e0cb9
+      internalID: -1302699175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platforms_4
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 258
+        width: 651
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ffe54e3c64d36a49bd3dadc15159d1c
+      internalID: -1831698758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platforms_5
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 258
+        width: 984
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18059ddf21342d04c99eee41fe2bc8fb
+      internalID: -505890516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platforms_6
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 55
+        width: 1893
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4a1f844919c1ec49b6c4b40f7ff97e8
+      internalID: 1846967463
       vertices: []
       indices: 
       edges: []
@@ -190,9 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_0: 1669574913
-      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_1: 751283174
-      favpng_sprite-platform-game-side-scrolling-2d-computer-graphics-two-dimensional-space_2: 946948213
+      platforms_0: 1066607847
+      platforms_1: -973605235
+      platforms_2: 1371106670
+      platforms_3: -1302699175
+      platforms_4: -1831698758
+      platforms_5: -505890516
+      platforms_6: 1846967463
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
