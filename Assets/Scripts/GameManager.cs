@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState = GameState.MENU;
     [SerializeField] private Canvas menuCanvas, gameCanvas, gameOverCanvas;
     public int collectedObjects = 0;
+    public int levelIndex = 1;
 
     private void Awake() {
         sharedInstance = this;
