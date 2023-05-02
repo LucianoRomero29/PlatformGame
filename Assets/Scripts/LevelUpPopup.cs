@@ -12,7 +12,6 @@ public class LevelUpPopup : MonoBehaviour
     {
         popupText = this.GetComponent<TextMeshProUGUI>();
         this.gameObject.SetActive(false);
-        Debug.Log(popupText);
     }
 
     public void ShowPopup(int level)
