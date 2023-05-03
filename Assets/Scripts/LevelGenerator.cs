@@ -45,6 +45,14 @@ public class LevelGenerator : MonoBehaviour
             addDistanceToNewLevel += 10;
             GameManager.sharedInstance.levelIndex++;
 
+            //TODO: Se me ocurre agregar un evento levelUp que sea basico, indique cuantos suben de nivel
+            // int levelIndex = GameManager.sharedInstance.levelIndex;
+            // Analytics.CustomEvent("level_complete", new Dictionary<string, object>{
+            //     {
+            //         "Level" + levelIndex, levelIndex
+            //     }
+            // });
+
             lvlUpPopup.ShowPopup(GameManager.sharedInstance.levelIndex);
             //TODO: Falta un sonido de checkpoint
 

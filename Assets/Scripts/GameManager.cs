@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 //Estados del videojuego para manejarlos a traves del manager
 public enum GameState{
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas menuCanvas, gameCanvas, gameOverCanvas;
     public int collectedObjects = 0;
     public int levelIndex = 1;
+    private int playersGame;
 
     private void Awake() {
         sharedInstance = this;
@@ -43,6 +45,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame(){
+
+        //TODO: Evento de level start
+        // Analytics.CustomEvent("level_start", new Dictionary<string, object>{
+        //     {"players_game", playersGame}
+        // });
+
         SetGameState(GameState.INGAME);
 
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");

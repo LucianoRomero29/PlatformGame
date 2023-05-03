@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody;
 
     private Vector3 startPosition;
+
+    //TODO: Esta variable es para el analytics para contar el total de muertes
+    //Tengo una duda con esta , porque siempre va a volver a 0, como persisto ese dato?
+    private int playersDead;
 
     [SerializeField]
     private float jumpForce = 50f;
@@ -90,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(bool isSuperJump)
     {
+        //TODO: Se me ocurre agregar un evento para saber cuantas personas hacen uso del doble salto
         if (IsTouchingTheGround())
         {
             if(isSuperJump && this.energyPoints >= SUPERJUMP_COST){
@@ -132,6 +138,15 @@ public class PlayerController : MonoBehaviour
         if(currentMaxScore < this.GetDistance()){
             PlayerPrefs.SetInt("maxScore", this.GetDistance());
         }
+
+        //TODO: Evento gameOver de analytics, debajo listo las variables a usar
+        // Analytics.CustomEvent("GameOver", new Dictionary<string, object>
+        // {
+        //     {"levelIndex", GameManager.sharedInstance.levelIndex},
+        //     {"totalScore", GameManager.sharedInstance.collectedObjects},
+        //     {"totalDistance", this.GetDistance()},
+        //     {"playersDead", playersDead++},
+        // });
 
         //No me interesa cansar al jugador
         //StopCoroutine(TirePlayer());
