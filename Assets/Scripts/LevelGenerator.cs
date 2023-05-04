@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -39,19 +41,18 @@ public class LevelGenerator : MonoBehaviour
     private void LevelUpByDistanceTraveled(){
         if(PlayerController.sharedInstance.GetDistance() > distanceToNextLevel + (addDistanceToNewLevel * GameManager.sharedInstance.levelIndex)){
             //Reseteo esta variable porque es la distancia que recorro por nivel, y si superó eso quiere decir que paso el nivel
-            //TODO: dejar comentado para test
-            //TODO: Descomentar para prod
             distanceToNextLevel = distanceToNextLevel * GameManager.sharedInstance.levelIndex;
             addDistanceToNewLevel += 10;
             GameManager.sharedInstance.levelIndex++;
 
-            //TODO: Se me ocurre agregar un evento levelUp que sea basico, indique cuantos suben de nivel
-            // int levelIndex = GameManager.sharedInstance.levelIndex;
-            // Analytics.CustomEvent("level_complete", new Dictionary<string, object>{
-            //     {
-            //         "Level" + levelIndex, levelIndex
-            //     }
-            // });
+            //TODO: Evento LevelComplete        
+            int levelIndex = GameManager.sharedInstance.levelIndex;
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                {"level_up", "Level " + levelIndex}
+            };
+            AnalyticsService.Instance.CustomData("levelComplete", parameters);
+
 
             lvlUpPopup.ShowPopup(GameManager.sharedInstance.levelIndex);
             //TODO: Falta un sonido de checkpoint

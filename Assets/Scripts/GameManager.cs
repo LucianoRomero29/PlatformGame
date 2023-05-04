@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 //Estados del videojuego para manejarlos a traves del manager
 public enum GameState{
@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager sharedInstance;
     public GameState currentGameState = GameState.MENU;
-    [SerializeField] private Canvas menuCanvas, gameCanvas, gameOverCanvas;
+    [SerializeField] private Canvas menuCanvas, gameCanvas, pauseCanvas, gameOverCanvas;
     public int collectedObjects = 0;
     public int levelIndex = 1;
-    private int playersGame;
+    private int playersGame = 0, pauseGame = 0, restartLevel;
 
     private void Awake() {
         sharedInstance = this;
@@ -33,23 +33,18 @@ public class GameManager : MonoBehaviour
             StartGame();
         }
 
-        if(Input.GetButtonDown("Pause")){
-            BackToMenu();
+        if(Input.GetKeyDown(KeyCode.P)){
+            PauseGame();
         }
-
-        #if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            ExitGame();
-        }
-        #endif
     }
 
     public void StartGame(){
-
-        //TODO: Evento de level start
-        // Analytics.CustomEvent("level_start", new Dictionary<string, object>{
-        //     {"players_game", playersGame}
-        // });
+        playersGame++;
+        Dictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            {"players_game", playersGame}
+        };
+        AnalyticsService.Instance.CustomData("levelStart", parameters);
 
         SetGameState(GameState.INGAME);
 
@@ -74,11 +69,43 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.GAMEOVER);
     }
 
+    public void PauseGame(){
+        //Esto estaba configurado en el manager con una tecla, sacarlo, ahora voy a llamar a esta funcion con un boton
+        if(!menuCanvas.enabled){
+            pauseCanvas.enabled = true;
+            Time.timeScale = 0;
+
+            pauseGame++;
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                {"pause_game", pauseGame}
+            };
+            AnalyticsService.Instance.CustomData("pauseGame", parameters);
+        }
+    }
+
+    public void ResumeGame(){
+        pauseCanvas.enabled = false;
+        Time.timeScale = 1;
+    }
+
+    public void RestartGame(){
+        Time.timeScale = 1;
+        restartLevel++;
+        Dictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            {"restart_level", restartLevel}
+        };
+
+        AnalyticsService.Instance.CustomData("restartLevel", parameters);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void BackToMenu(){
         SetGameState(GameState.MENU);
     }
 
-    //Para mobile no es necesario esto. 
     public void ExitGame(){
         //Application.Quit();
         //Se utilizan estos IF / ELSE con # indicando que es una decision basada en la plataforma que se va a ejecutar
@@ -96,16 +123,19 @@ public class GameManager : MonoBehaviour
             menuCanvas.enabled = true;
             gameCanvas.enabled = false;
             gameOverCanvas.enabled = false;
+            pauseCanvas.enabled = false;
         }
         else if(newGameState == GameState.INGAME){
             menuCanvas.enabled = false;
             gameCanvas.enabled = true;
             gameOverCanvas.enabled = false;
+            pauseCanvas.enabled = false;
         }
         else if(newGameState == GameState.GAMEOVER){
             menuCanvas.enabled = false;
             gameCanvas.enabled = false;
             gameOverCanvas.enabled = true;
+            pauseCanvas.enabled = false;
         }
 
         this.currentGameState = newGameState;

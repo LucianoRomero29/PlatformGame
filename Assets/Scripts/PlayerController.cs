@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int healthPoints, energyPoints;
 
+    private int doubleJump = 0;
+
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSound;
+
     public const int INITIAL_HEALTH = 100, INITIAL_ENERGY = 15, MAX_HEALTH = 150, MAX_ENERGY = 25;
     public const int MIN_HEALTH = 20;
     public const float MIN_SPEED = 2.5f, HEALTH_TIME_DECREASE = 1.0f;
@@ -43,6 +49,9 @@ public class PlayerController : MonoBehaviour
         
         //Guardo siempre la pos inicial
         startPosition = this.transform.position;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = 0.2f;
     }
 
     public void StartGame()
@@ -95,7 +104,6 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(bool isSuperJump)
     {
-        //TODO: Se me ocurre agregar un evento para saber cuantas personas hacen uso del doble salto
         if (IsTouchingTheGround())
         {
             if(isSuperJump && this.energyPoints >= SUPERJUMP_COST){
@@ -104,13 +112,20 @@ public class PlayerController : MonoBehaviour
             }else{
                 rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
-            
+
+            doubleJump++;
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                {"double_jump", doubleJump}
+            };
+            AnalyticsService.Instance.CustomData("doubleJump", parameters);
+
+            audioSource.PlayOneShot(this.jumpSound);
         }
     }
 
     private bool IsTouchingTheGround()
     {   
-        //TODO: Ese 2.0 ajustarlo mejor, fijarse que valor es mejor
         //Trazar un rayo (raycast) desde la pos del personaje, mirando hacia abajo, a una distancia de 0.2 (20 centimetros), choco contra el suelo
         if (Physics2D.Raycast(this.transform.position, Vector2.down, 2.1f, groundLayer))
         {
@@ -139,17 +154,15 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("maxScore", this.GetDistance());
         }
 
-        //TODO: Evento gameOver de analytics, debajo listo las variables a usar
-        // Analytics.CustomEvent("GameOver", new Dictionary<string, object>
-        // {
-        //     {"levelIndex", GameManager.sharedInstance.levelIndex},
-        //     {"totalScore", GameManager.sharedInstance.collectedObjects},
-        //     {"totalDistance", this.GetDistance()},
-        //     {"playersDead", playersDead++},
-        // });
+        Dictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            {"level_index", GameManager.sharedInstance.levelIndex},
+            {"total_score", GameManager.sharedInstance.collectedObjects},
+            {"total_distance", this.GetDistance()},
+            {"players_dead", playersDead++},
+        };
 
-        //No me interesa cansar al jugador
-        //StopCoroutine(TirePlayer());
+        AnalyticsService.Instance.CustomData("gameOver", parameters);
     }
 
     public int GetDistance(){

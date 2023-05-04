@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   value: 1
-  collectSound: {fileID: 8300000, guid: d096da07b2554644197534d4ee579129, type: 3}
+  collectSound: {fileID: 8300000, guid: 8438ea3f1a1a069468af4fcdda81d0ee, type: 3}
 --- !u!82 &5786601879779133468
 AudioSource:
   m_ObjectHideFlags: 0

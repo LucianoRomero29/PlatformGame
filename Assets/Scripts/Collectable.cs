@@ -39,9 +39,9 @@ public class Collectable : MonoBehaviour
         isCollected = true;
         Hide();
      
-        if(audioSource != null && this.collectSound != null){
-            audioSource.PlayOneShot(this.collectSound);
-        }
+        // if(audioSource != null && this.collectSound != null){
+        //     audioSource.PlayOneShot(this.collectSound);
+        // }
 
         switch(this.type){
             case CollectableType.money:
