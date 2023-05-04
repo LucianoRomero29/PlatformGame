@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -13,6 +15,16 @@ public class LevelGenerator : MonoBehaviour
     //Esta lista se rellena dinamicamente
     [SerializeField] private List<LevelBlock> currentBlocks = new List<LevelBlock>();
     [SerializeField] private LevelBlock firstBlock;
+    [SerializeField] private LevelUpPopup lvlUpPopup;
+
+    //TODO: 20 y 5 test
+    //TODO: 150 y 10 prod
+    private int distanceToNextLevel = 150, addDistanceToNewLevel = 10;
+    [Header("Levels")]
+    [SerializeField] private List<GameLevel> gameLevels;
+    
+    private bool allLevelsPassed = false;
+    private int levelIndex;
 
     private void Awake() {
         sharedInstance = this;
@@ -22,9 +34,40 @@ public class LevelGenerator : MonoBehaviour
         GenerateInitialBlocks();
     }
 
-    public void AddLevelBlock(){
+    private void Update() {
+        LevelUpByDistanceTraveled();
+    }
+
+    private void LevelUpByDistanceTraveled(){
+        if(PlayerController.sharedInstance.GetDistance() > distanceToNextLevel + (addDistanceToNewLevel * GameManager.sharedInstance.levelIndex)){
+            //Reseteo esta variable porque es la distancia que recorro por nivel, y si superó eso quiere decir que paso el nivel
+            distanceToNextLevel = distanceToNextLevel * GameManager.sharedInstance.levelIndex;
+            addDistanceToNewLevel += 10;
+            GameManager.sharedInstance.levelIndex++;
+
+            //TODO: Evento LevelComplete        
+            int levelIndex = GameManager.sharedInstance.levelIndex;
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                {"level_up", "Level " + levelIndex}
+            };
+            AnalyticsService.Instance.CustomData("levelComplete", parameters);
+
+
+            lvlUpPopup.ShowPopup(GameManager.sharedInstance.levelIndex);
+            //TODO: Falta un sonido de checkpoint
+
+            if(GameManager.sharedInstance.levelIndex > gameLevels.Count){
+                allLevelsPassed = true;
+            }
+        }
+    }
+
+    public void AddLevelBlock(bool restartGame = false){
+        levelIndex = restartGame == true ? levelIndex = 1 : GameManager.sharedInstance.levelIndex;
+
         //Elige un bloque random
-        int randomIndex = Random.Range(0, allTheLevelBlocks.Count);
+        int randomIndex = !allLevelsPassed ? Random.Range(0, gameLevels[levelIndex - 1].GetComponent<GameLevel>().level.Count) : Random.Range(0, allTheLevelBlocks.Count);
 
         //Instancia ese bloque elegido y lo hace hijo de este levelgenerator
         LevelBlock currentBlock; 
@@ -37,7 +80,7 @@ public class LevelGenerator : MonoBehaviour
             currentBlock.transform.SetParent(this.transform, false);
             spawnPosition = levelStartPoint.position;
         }else{
-            currentBlock = (LevelBlock)Instantiate(allTheLevelBlocks[randomIndex]);
+            currentBlock = !allLevelsPassed ? (LevelBlock)Instantiate(gameLevels[levelIndex - 1].GetComponent<GameLevel>().level[randomIndex]) : (LevelBlock)Instantiate(allTheLevelBlocks[randomIndex]);
             currentBlock.transform.SetParent(this.transform, false);
             spawnPosition = currentBlocks[currentBlocks.Count - 1].exitPoint.position;
         }
@@ -62,10 +105,10 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateInitialBlocks(){
+    public void GenerateInitialBlocks(bool restartLevel = false){
         for (var i = 0; i < 2; i++)
         {
-            AddLevelBlock();
+            AddLevelBlock(restartLevel);
         }
     }
 }
