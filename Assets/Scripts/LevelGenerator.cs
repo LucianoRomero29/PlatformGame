@@ -16,9 +16,6 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private List<LevelBlock> currentBlocks = new List<LevelBlock>();
     [SerializeField] private LevelBlock firstBlock;
     [SerializeField] private LevelUpPopup lvlUpPopup;
-
-    //TODO: 20 y 5 test
-    //TODO: 150 y 10 prod
     private int distanceToNextLevel = 150, addDistanceToNewLevel = 10;
     [Header("Levels")]
     [SerializeField] private List<GameLevel> gameLevels;
@@ -41,11 +38,11 @@ public class LevelGenerator : MonoBehaviour
     private void LevelUpByDistanceTraveled(){
         if(PlayerController.sharedInstance.GetDistance() > distanceToNextLevel + (addDistanceToNewLevel * GameManager.sharedInstance.levelIndex)){
             //Reseteo esta variable porque es la distancia que recorro por nivel, y si superó eso quiere decir que paso el nivel
-            distanceToNextLevel = distanceToNextLevel * GameManager.sharedInstance.levelIndex;
+            Debug.Log(distanceToNextLevel);
+            distanceToNextLevel += distanceToNextLevel * GameManager.sharedInstance.levelIndex;
             addDistanceToNewLevel += 10;
             GameManager.sharedInstance.levelIndex++;
-
-            //TODO: Evento LevelComplete        
+   
             int levelIndex = GameManager.sharedInstance.levelIndex;
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
