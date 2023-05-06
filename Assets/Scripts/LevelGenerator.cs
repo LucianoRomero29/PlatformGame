@@ -16,7 +16,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private List<LevelBlock> currentBlocks = new List<LevelBlock>();
     [SerializeField] private LevelBlock firstBlock;
     [SerializeField] private LevelUpPopup lvlUpPopup;
-    private int distanceToNextLevel = 150, addDistanceToNewLevel = 10;
+    private int distanceToNextLevel = 100, addDistanceToNewLevel = 10;
     [Header("Levels")]
     [SerializeField] private List<GameLevel> gameLevels;
     
