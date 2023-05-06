@@ -38,7 +38,6 @@ public class LevelGenerator : MonoBehaviour
     private void LevelUpByDistanceTraveled(){
         if(PlayerController.sharedInstance.GetDistance() > distanceToNextLevel + (addDistanceToNewLevel * GameManager.sharedInstance.levelIndex)){
             //Reseteo esta variable porque es la distancia que recorro por nivel, y si superó eso quiere decir que paso el nivel
-            Debug.Log(distanceToNextLevel);
             distanceToNextLevel += distanceToNextLevel * GameManager.sharedInstance.levelIndex;
             addDistanceToNewLevel += 10;
             GameManager.sharedInstance.levelIndex++;
@@ -49,6 +48,12 @@ public class LevelGenerator : MonoBehaviour
                 {"level_up", "Level " + levelIndex}
             };
             AnalyticsService.Instance.CustomData("levelComplete", parameters);
+
+            Dictionary<string, object> parametersTwo = new Dictionary<string, object>()
+            {
+                {"level_index", levelIndex}
+            };
+            AnalyticsService.Instance.CustomData("levelStart", parametersTwo);
 
 
             lvlUpPopup.ShowPopup(GameManager.sharedInstance.levelIndex);
