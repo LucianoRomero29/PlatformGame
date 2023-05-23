@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip jumpSound;
 
-    public const int INITIAL_HEALTH = 100, INITIAL_ENERGY = 15, MAX_HEALTH = 150, MAX_ENERGY = 25;
+    public const int INITIAL_HEALTH = 100, INITIAL_ENERGY = 10, MAX_HEALTH = 150, MAX_ENERGY = 25;
     public const int MIN_HEALTH = 20;
     public const float MIN_SPEED = 2.5f, HEALTH_TIME_DECREASE = 1.0f;
     public const int SUPERJUMP_COST = 3;

@@ -9,6 +9,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject[] imagesAudio;
     [SerializeField] AudioSource audioSourceMusic, audioSourcePlayer;
     private bool muteMusic = false, muteSFX = true;
+
+    public static UIManager sharedInstance;
+    private void Awake() {
+        sharedInstance = this;
+    }
+
     public void MuteAndDesmuteMusic(){
         Dictionary<string, object> parameters = new Dictionary<string, object>()
         {

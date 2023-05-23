@@ -36,6 +36,14 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P)){
             PauseGame();
         }
+
+        if(Input.GetKeyDown(KeyCode.N)){
+            UIManager.sharedInstance.MuteAndDesmuteSFX();
+        }
+
+        if(Input.GetKeyDown(KeyCode.M)){
+            UIManager.sharedInstance.MuteAndDesmuteMusic();
+        }
     }
 
     public void StartGame(){
