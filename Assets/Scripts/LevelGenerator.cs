@@ -43,9 +43,10 @@ public class LevelGenerator : MonoBehaviour
             GameManager.sharedInstance.levelIndex++;
    
             int levelIndex = GameManager.sharedInstance.levelIndex;
+
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                {"level_up", "Level " + levelIndex}
+                {"level_up", levelIndex}
             };
             
             Dictionary<string, object> parametersTwo = new Dictionary<string, object>()
