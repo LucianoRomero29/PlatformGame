@@ -47,14 +47,14 @@ public class LevelGenerator : MonoBehaviour
             {
                 {"level_up", "Level " + levelIndex}
             };
-            AnalyticsService.Instance.CustomData("levelComplete", parameters);
-
+            
             Dictionary<string, object> parametersTwo = new Dictionary<string, object>()
             {
                 {"level_index", levelIndex}
             };
-            AnalyticsService.Instance.CustomData("levelStart", parametersTwo);
 
+            AnalyticsService.Instance.CustomData("levelComplete", parameters);
+            AnalyticsService.Instance.CustomData("levelStart", parametersTwo);
 
             lvlUpPopup.ShowPopup(GameManager.sharedInstance.levelIndex);
             //TODO: Falta un sonido de checkpoint

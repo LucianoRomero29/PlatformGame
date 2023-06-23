@@ -38,10 +38,6 @@ public class Collectable : MonoBehaviour
     private void Collect(){
         isCollected = true;
         Hide();
-     
-        // if(audioSource != null && this.collectSound != null){
-        //     audioSource.PlayOneShot(this.collectSound);
-        // }
 
         switch(this.type){
             case CollectableType.money:
@@ -63,8 +59,7 @@ public class Collectable : MonoBehaviour
             if(flagCollected == 0){
                 flagCollected++;
                 Collect();
-            }
-            
+            }  
         }
     }
 }

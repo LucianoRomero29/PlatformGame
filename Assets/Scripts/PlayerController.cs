@@ -11,9 +11,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody;
 
     private Vector3 startPosition;
-
-    //TODO: Esta variable es para el analytics para contar el total de muertes
-    //Tengo una duda con esta , porque siempre va a volver a 0, como persisto ese dato?
+    
     private int playersDead;
 
     [SerializeField]
