@@ -16,7 +16,7 @@ public class LevelUpPopup : MonoBehaviour
 
     public void ShowPopup(int level)
     {
-        popupText.text = "Level Up! You are now level " + level.ToString() + "!";
+        popupText.text = "Subiste de nivel! Ahora estas en el nivel " + level.ToString() + "!";
         this.gameObject.SetActive(true);
         StartCoroutine(HidePopup());
     }

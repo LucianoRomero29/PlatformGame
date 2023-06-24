@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Services.Analytics;
+using TMPro;
 
 //Estados del videojuego para manejarlos a traves del manager
 public enum GameState{
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     public static GameManager sharedInstance;
     public GameState currentGameState = GameState.MENU;
     [SerializeField] private Canvas menuCanvas, gameCanvas, pauseCanvas, gameOverCanvas;
+    [SerializeField] private TextMeshProUGUI textDoubleJump;
+    private bool isShowing = false;
     public int collectedObjects = 0;
     public int levelIndex = 1;
     private int playersGame = 0, pauseGame = 0, restartLevel;
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         BackToMenu();
+        InvokeRepeating("ToggleText", 20f, 20f);
     }
 
     private void Update() {
@@ -151,5 +155,22 @@ public class GameManager : MonoBehaviour
 
     public void CollectObject(int objectValue){
         this.collectedObjects += objectValue;
+    }
+
+    private void ToggleText()
+    {
+        if (isShowing)
+        {
+            // Si el texto está mostrándose, se oculta después de 2 segundos
+            textDoubleJump.gameObject.SetActive(false);
+            isShowing = false;
+        }
+        else
+        {
+            // Si el texto está oculto, se muestra durante 2 segundos
+            textDoubleJump.gameObject.SetActive(true);
+            isShowing = true;
+            Invoke("ToggleText", 3f);
+        }
     }
 }

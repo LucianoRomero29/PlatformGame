@@ -16,7 +16,7 @@ public class ViewInGame : MonoBehaviour
 
         if(GameManager.sharedInstance.currentGameState == GameState.INGAME){
             int traveledDistance = PlayerController.sharedInstance.GetDistance();
-            this.scoreLabel.text = "Distance\n"+traveledDistance.ToString("f0");
+            this.scoreLabel.text = "Distancia\n"+traveledDistance.ToString("f0");
 
             int maxScore = PlayerPrefs.GetInt("maxScore", 0);
             this.maxScoreLabel.text = "MaxScore\n" + maxScore.ToString("f0");
